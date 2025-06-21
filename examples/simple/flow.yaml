@@ -6,7 +6,7 @@ package:
 
   imports:
   - "${{ env.IVPM_PACKAGES }}/svt"
-  - "${{ env.IVPM_PROJECT }}"
+  - "${{ env.IVPM_PROJECT }}/src/share/psv"
 
   tasks:
   - name: run
@@ -20,7 +20,7 @@ package:
     uses: hdlsim.vlt.SimImage
     needs: 
     - svt.hvlsrc
-    - pss-sv-if.hvlsrc
+    - psv.hvlsrc-dpi
     - simple-src
     with:
       top: [simple]

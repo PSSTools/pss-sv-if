@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://dv-flow.github.io/flow.dv.schema.json
 
 package:
-  name: pss-sv-if
+  name: psv
 
   tasks:
   - name: hvlsrc
@@ -13,4 +13,16 @@ package:
       incdirs:
       - src
       include:
-      - pss_sv_if.sv
+      - psv.sv
+
+  - name: hvlsrc-dpi
+    uses: std.FileSet
+    needs: [hvlsrc]
+    with:
+      type: systemVerilogSource
+      base: src/dpi
+      incdirs:
+      - src/dpi
+      include:
+      - psv_dpi.sv
+
