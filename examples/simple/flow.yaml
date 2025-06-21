@@ -1,0 +1,37 @@
+
+# yaml-language-server: $schema=https://dv-flow.github.io/flow.dv.schema.json
+
+package:
+  name: examples.simple
+
+  imports:
+  - "${{ env.IVPM_PACKAGES }}/svt"
+  - "${{ env.IVPM_PROJECT }}"
+
+  tasks:
+  - name: run
+    uses: hdlsim.vlt.SimRun
+    needs: [sim-img]
+    with:
+      plusargs:
+      - SVT_TESTNAME=my_test
+
+  - name: sim-img
+    uses: hdlsim.vlt.SimImage
+    needs: 
+    - svt.hvlsrc
+    - pss-sv-if.hvlsrc
+    - simple-src
+    with:
+      top: [simple]
+  
+  - name: simple-src
+    uses: std.FileSet
+    with:
+      type: systemVerilogSource
+      include:
+      - simple_pkg.sv
+      - simple.sv
+
+      
+
